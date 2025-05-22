@@ -51,9 +51,9 @@ public class ContactsPage extends AbstractComponents
     {
         waitForWebElementToAppear(Menu);
         Menu.click();
-        waitForWebElementToBeClickable(ContactsModule);
+        //waitForWebElementToBeClickable(ContactsModule);
         ContactsModule.click();
-        waitForWebElementToBeClickable(AddContactBtn);
+        //waitForWebElementToBeClickable(AddContactBtn);
         AddContactBtn.click();
     }
 
