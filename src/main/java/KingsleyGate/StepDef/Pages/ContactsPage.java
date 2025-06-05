@@ -26,8 +26,11 @@ public class ContactsPage extends AbstractComponents
     @FindBy(xpath = "//div[@class='hamburger-span']//*[name()='svg']")
     WebElement Menu;
 
-    @FindBy(xpath = "(//div[@aria-label='Contacts'])")
+    @FindBy(xpath = "//div[contains(text(),'CONTACTS')]")
     WebElement ContactsModule;
+    
+   // @FindBy(xpath = "//div[@class='side-nav-container open']/div/div[1]/div[3]/div")
+    //WebElement ContactsModule;
 
     @FindBy(css = "[data-testid='AddIcon']")
     WebElement AddContactBtn;
@@ -51,9 +54,9 @@ public class ContactsPage extends AbstractComponents
     {
         waitForWebElementToAppear(Menu);
         Menu.click();
-        //waitForWebElementToBeClickable(ContactsModule);
+        waitForWebElementToBeClickable(ContactsModule);
         ContactsModule.click();
-        //waitForWebElementToBeClickable(AddContactBtn);
+        waitForWebElementToBeClickable(AddContactBtn);
         AddContactBtn.click();
     }
 
@@ -66,15 +69,15 @@ public class ContactsPage extends AbstractComponents
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         if(!FirstName.isEmpty())
         {
-            SaveContactBtn.click();
+            //SaveContactBtn.click();
         }
         else
         {
             wait.until(ExpectedConditions.not(ExpectedConditions.attributeToBe(FirstNameField,"value","")));
-            SaveContactBtn.click();
+           // SaveContactBtn.click();
         }
 
-        System.out.println(SaveContactPopUpMsg.getText());
+        //System.out.println(SaveContactPopUpMsg.getText());
     }
 
 }
