@@ -70,7 +70,7 @@ public class HooksClass
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.get(URL);
         System.out.println("Selected browser: " + browser);
         return driver;
