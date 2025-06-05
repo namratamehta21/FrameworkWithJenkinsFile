@@ -22,35 +22,35 @@ public class HooksClass
     WebDriver driver;
     LoginPage LP;
 
-    public WebDriver initializeDriver() throws IOException
-{
+public WebDriver initializeDriver() throws IOException {
     Properties prop = new Properties();
-    FileInputStream FIS=new FileInputStream(System.getProperty("user.dir")
-            +"//src//main//java//Resources//Global.properties");
+    FileInputStream FIS = new FileInputStream(System.getProperty("user.dir")
+            + "//src//main//java//Resources//Global.properties");
     prop.load(FIS);
-    String browser = System.getProperty("browser") != null ? System.getProperty("browser") : prop.getProperty("browser");
-    String URL=prop.getProperty("url");
+
+    String browser = System.getProperty("browser") != null
+            ? System.getProperty("browser")
+            : prop.getProperty("browser");
+
+    String URL = prop.getProperty("url");
+
     String headlessFlag = System.getProperty("headless") != null
             ? System.getProperty("headless")
             : prop.getProperty("headless");
+
     boolean isHeadless = headlessFlag.equalsIgnoreCase("true");
 
     if (browser.equalsIgnoreCase("chrome")) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
 
-        // Add unique user-data-dir to avoid conflict
-        String userDataDir = "/tmp/selenoid-chrome-user-data-" + System.currentTimeMillis();
-        options.addArguments("--user-data-dir=" + userDataDir);
-
-        // Add headless and other flags if needed
         if (isHeadless) {
-            options.addArguments("--headless=new"); // or just "--headless" depending on your ChromeDriver version
+            options.addArguments("--headless=new"); // use "--headless" if needed
             options.addArguments("--window-size=1920,1080");
             options.addArguments("--disable-gpu");
         }
 
-        // Linux-friendly options for stability on Jenkins
+        // Linux-friendly stability flags (especially for Jenkins/Docker)
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
 
@@ -59,21 +59,25 @@ public class HooksClass
     } else if (browser.equalsIgnoreCase("firefox")) {
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
+
         if (isHeadless) {
             options.addArguments("--headless");
             options.addArguments("--width=1920");
             options.addArguments("--height=1080");
         }
+
         driver = new FirefoxDriver(options);
 
     } else if (browser.equalsIgnoreCase("edge")) {
         WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
+
         if (isHeadless) {
             options.addArguments("headless");
             options.addArguments("disable-gpu");
             options.addArguments("window-size=1920,1080");
         }
+
         driver = new EdgeDriver(options);
 
     } else {
@@ -81,7 +85,6 @@ public class HooksClass
     }
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    //driver.manage().window().maximize();
     driver.manage().window().setSize(new Dimension(1920, 1080));
     driver.get(URL);
 
