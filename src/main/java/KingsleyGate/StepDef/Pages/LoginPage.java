@@ -37,6 +37,12 @@ public class LoginPage extends AbstractComponents
         ContactsPage CP=new ContactsPage(driver);
         return CP;
     }
+    
+    public CompaniesPage Logging_Companies_Page()
+    {
+        CompaniesPage Companies_Page=new CompaniesPage(driver);
+        return Companies_Page;
+    }
 
     public String Verifying_Home_Page()
     {

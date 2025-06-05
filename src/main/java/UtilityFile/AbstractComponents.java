@@ -1,5 +1,6 @@
 package UtilityFile;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -21,7 +22,7 @@ public class AbstractComponents
 
     public void waitForWebElementToAppear(WebElement findBy)
     {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(findBy));
     }
 
@@ -31,5 +32,12 @@ public class AbstractComponents
         wait.until(ExpectedConditions.elementToBeClickable(findBy));
 
     }
+
+    public void waitForDomUpdate() {
+        new WebDriverWait(driver, Duration.ofMillis(300))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        By.xpath("//span[@class='ag-column-select-column-label']")));
+    }
+
 
 }
