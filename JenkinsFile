@@ -1,13 +1,11 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    tools {
+        maven 'Maven'  // your Jenkins Maven tool name
+    }
 
+    stages {
         stage('Build') {
             steps {
                 sh 'mvn clean compile'
@@ -23,7 +21,7 @@ pipeline {
 
     post {
         always {
-            junit 'Reports/**/*.xml'
+            junit 'Reports/*.xml'
         }
     }
 }
