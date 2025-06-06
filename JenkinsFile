@@ -1,27 +1,47 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'  // your Jenkins Maven tool name
+    environment {
+        // Set default values for headless and browser config
+        BROWSER = 'chrome'
+        HEADLESS = 'true'
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                echo 'Cloning repository...'
+                git url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
+            }
+        }
+
         stage('Build') {
             steps {
+                echo 'Building Maven project...'
                 sh 'mvn clean compile'
             }
         }
 
-        stage('Test') {
+        stage('Run Tests - Headless') {
             steps {
-                sh 'mvn test'
+                echo "Running tests in headless mode using browser: ${BROWSER}"
+                sh "mvn test -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
             }
         }
     }
 
     post {
         always {
-            junit 'Reports/*.xml'
+            echo 'Cleaning up workspace...'
+            cleanWs()
+        }
+
+        success {
+            echo 'Build and tests ran successfully.'
+        }
+
+        failure {
+            echo 'Build failed. Please check the console output for errors.'
         }
     }
 }
