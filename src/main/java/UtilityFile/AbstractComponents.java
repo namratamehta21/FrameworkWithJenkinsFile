@@ -1,6 +1,7 @@
 package UtilityFile;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -39,5 +40,10 @@ public class AbstractComponents
                         By.xpath("//span[@class='ag-column-select-column-label']")));
     }
 
-
+    public void waitForPageToLoad(WebElement element) {
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(
+                webDriver -> ((JavascriptExecutor) webDriver)
+                        .executeScript("return document.readyState").equals("complete")
+        );
+    }
 }
