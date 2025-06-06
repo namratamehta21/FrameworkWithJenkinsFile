@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     environment {
-        // Set default values for headless and browser config
         BROWSER = 'chrome'
         HEADLESS = 'true'
     }
 
-    stage('Checkout') {
-        steps {
-            echo 'Cloning repository...'
-            git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Cloning repository...'
+                git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
+            }
         }
-    }
 
         stage('Build') {
             steps {
@@ -34,11 +34,9 @@ pipeline {
             echo 'Cleaning up workspace...'
             cleanWs()
         }
-
         success {
             echo 'Build and tests ran successfully.'
         }
-
         failure {
             echo 'Build failed. Please check the console output for errors.'
         }
