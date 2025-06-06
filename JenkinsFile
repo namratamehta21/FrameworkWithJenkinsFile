@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven_3.9.9' // This must match the name set in Global Tool Configuration
+    }
+
     environment {
         BROWSER = 'chrome'
         HEADLESS = 'true'
