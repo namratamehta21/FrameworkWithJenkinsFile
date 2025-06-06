@@ -31,12 +31,31 @@ pipeline {
                 sh "mvn test -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
             }
         }
+
+        stage('Cucumber Report Dashboard') {
+            steps {
+                echo 'Publishing Cucumber JSON dashboard report...'
+                cucumber buildStatus: 'UNSTABLE',
+                         fileIncludePattern: 'Json/cucumber.json',
+                         sortingMethod: 'ALPHABETICAL',
+                         trendsLimit: 10
+            }
+        }
     }
 
     post {
         always {
             echo 'Cleaning up workspace...'
             cleanWs()
+
+            publishHTML (target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'Reports',
+                reportFiles: 'cucumber-reports.html',
+                reportName: 'Cucumber HTML Report'
+            ])
         }
         success {
             echo 'Build and tests ran successfully.'

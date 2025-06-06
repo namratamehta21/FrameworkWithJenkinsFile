@@ -26,7 +26,7 @@ public class CompaniesPage extends AbstractComponents
     @FindBy(xpath = "//div[contains(text(),'COMPANIES')]")
     WebElement CompaniesModuleIcon;
 
-    @FindBy(xpath = "//span[@class='MuiBox-root css-0']")
+    @FindBy(xpath = "(//p[contains(@class, 'company_name') and contains(@class, 'company-display')])[1]")
     WebElement AnyOneCompany;
 
     @FindBy(xpath = "//div[@id='contact-search']//input[@placeholder='Search']")
@@ -35,7 +35,7 @@ public class CompaniesPage extends AbstractComponents
     @FindBy(xpath = "//span[@class='search-icon p-0']")
     WebElement SearchBtn;
 
-    @FindBy(xpath = "//span[@class='header-font header-text fs-18 mr-2 MuiBox-root css-0']")
+    @FindBy(xpath = "//div[contains(@class,'MuiStack-root')]//span[contains(@class,'header-font') and contains(@class,'header-text')]")
     WebElement CompanyName_SlideBar;
 
     @FindBy(xpath = "//span[normalize-space()='Columns']")
@@ -89,40 +89,6 @@ public class CompaniesPage extends AbstractComponents
         waitForWebElementToAppear(AnyOneCompany);
         ColumnTab_Sidebar.click();
     }
-
-//    public void AddColumnToGrid()
-//    {
-//        waitForWebElementToAppear(SelectAllColumn);
-//        SelectAllColumn.click();
-//
-//        String[] ColumnRequired =
-//                {
-//                        "Name","Location","Company Status","Industry",
-//                        "Revenue Range","Employee Range From","Employee Range to",
-//                        "Updated By", "Capital Structure","Created By"
-//                };
-//
-//        int count = 0;
-//        for (String expected : ColumnRequired) {
-//
-//            List<WebElement> columns = ListOfColumns;
-//
-//            for (WebElement element : columns) {
-//                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-//
-//                String ColumnText = element.getText().trim();
-//                if (ColumnText.equalsIgnoreCase(expected)) {
-//                    element.click();
-//                    count++;
-//                    break;
-//                }
-//            }
-//
-//            if (count == ColumnRequired.length) {
-//                break;
-//            }
-//        }
-//    }
 
     public void AddColumnToGrid() {
         waitForWebElementToAppear(SelectAllColumn);

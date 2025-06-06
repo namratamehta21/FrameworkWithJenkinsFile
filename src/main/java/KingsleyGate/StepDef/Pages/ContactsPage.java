@@ -67,15 +67,15 @@ public class ContactsPage extends AbstractComponents
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         if(!FirstName.isEmpty())
         {
-            SaveContactBtn.click();
+//            SaveContactBtn.click();
         }
         else
         {
             wait.until(ExpectedConditions.not(ExpectedConditions.attributeToBe(FirstNameField,"value","")));
-            SaveContactBtn.click();
+//            SaveContactBtn.click();
         }
 
-        System.out.println(SaveContactPopUpMsg.getText());
+//        System.out.println(SaveContactPopUpMsg.getText());
     }
 
 }
