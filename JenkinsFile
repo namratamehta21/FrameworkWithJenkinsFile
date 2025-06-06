@@ -41,26 +41,21 @@ pipeline {
                          trendsLimit: 10
             }
         }
-
-        stage('Publish HTML Report') {
-            steps {
-                echo 'Publishing Cucumber HTML report...'
-                publishHTML(target: [
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'Reports',
-                    reportFiles: 'cucumber-reports.html',
-                    reportName: 'Cucumber HTML Report'
-                ])
-            }
-        }
     }
 
     post {
         always {
             echo 'Cleaning up workspace...'
             cleanWs()
+
+            publishHTML (target: [
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'Reports',
+                reportFiles: 'cucumber-reports.html',
+                reportName: 'Cucumber HTML Report'
+            ])
         }
         success {
             echo 'Build and tests ran successfully.'
