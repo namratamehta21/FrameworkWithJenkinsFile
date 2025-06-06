@@ -23,16 +23,16 @@ Feature:CompaniesPage
       | Email                                  | Password      |
       |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! |
 
-#  @CompaniesPage
-#  Scenario Outline: Navigating to Companies Page and user search for a company
-#    Given User landed on Ignyte App
-#    When User logged in With valid Email <Email> and Password <Password>
-#    Then User Navigates to Companies Page
-#    Then User search for a Company <Company_Name>
-#
-#    Examples:
-#      | Email                                  | Password      |Company_Name |
-#      |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Google      |
+  @CompaniesPage
+  Scenario Outline: Navigating to Companies Page and user search for a company
+    Given User landed on Ignyte App
+    When User logged in With valid Email <Email> and Password <Password>
+    Then User Navigates to Companies Page
+    Then User search for a Company <Company_Name>
+
+    Examples:
+      | Email                                  | Password      |Company_Name |
+      |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Google      |
 
   @CompaniesPage
   Scenario Outline: Navigating to Companies Page and user clicks on column tab
