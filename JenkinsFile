@@ -7,13 +7,12 @@ pipeline {
         HEADLESS = 'true'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                echo 'Cloning repository...'
-                git url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
-            }
+    stage('Checkout') {
+        steps {
+            echo 'Cloning repository...'
+            git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
         }
+    }
 
         stage('Build') {
             steps {
