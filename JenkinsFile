@@ -8,6 +8,7 @@ pipeline {
     environment {
         BROWSER = 'chrome'
         HEADLESS = 'true'
+        CUCUMBER_PUBLISH_ENABLED = 'true'
     }
 
     stages {
