@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // <-- matches the tool name from your Jenkins config
+        maven 'Maven'  // Ensure this matches Jenkins global tool config
     }
 
     environment {
@@ -45,19 +45,23 @@ pipeline {
 
     post {
         always {
-            echo 'Post-build actions: publishing reports and cleaning workspace'
-
+            echo 'Archiving report artifacts...'
             cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber.json'
 
+            publishHTML(target: [
+                reportName: 'Cucumber HTML Report',
+                reportDir: 'target/cucumber-html-reports',
+                reportFiles: 'overview-features.html',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: false
+            ])
+
+            // 🔗 Print report link in console
             script {
-                publishHTML(target: [
-                    reportDir: 'target/cucumber-html-reports', // path to your HTML report folder
-                    reportFiles: 'index.html',                 // entry point file
-                    reportName: 'Cucumber HTML Report',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true,
-                    allowMissing: true
-                ])
+                def jobName = env.JOB_NAME.replaceAll("%2F", "/")
+                def buildUrl = env.BUILD_URL
+                echo "🔗 Cucumber HTML Report: ${buildUrl}HTML_20Report/"
             }
 
             cleanWs()
