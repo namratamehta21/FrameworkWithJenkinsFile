@@ -45,8 +45,21 @@ pipeline {
 
     post {
         always {
+            echo 'Post-build actions: publishing reports and cleaning workspace'
+
             cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber.json'
-            publishHTML(...)
+
+            script {
+                publishHTML(target: [
+                    reportDir: 'target/cucumber-html-reports', // path to your HTML report folder
+                    reportFiles: 'index.html',                 // entry point file
+                    reportName: 'Cucumber HTML Report',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: true
+                ])
+            }
+
             cleanWs()
         }
     }
