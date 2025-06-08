@@ -18,24 +18,10 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Run Tests and Generate Report') {
             steps {
-                echo 'Building Maven project...'
-                sh 'mvn clean compile'
-            }
-        }
-
-        stage('Run Tests - Headless') {
-            steps {
-                echo "Running tests in headless mode using browser: ${BROWSER}"
-                sh "mvn test -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
-            }
-        }
-
-        stage('Generate Cucumber HTML Report') {
-            steps {
-                echo 'Generating Cucumber HTML report from JSON...'
-                sh 'mvn verify'
+                echo "Running tests and generating report using browser: ${BROWSER}"
+                sh "mvn verify -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
             }
         }
 
@@ -50,24 +36,30 @@ pipeline {
         }
     }
 
-    // ✅ This must be OUTSIDE the stages block
     post {
         always {
             echo 'Archiving report artifacts...'
 
-            cucumber buildStatus: 'UNSTABLE',
-                     fileIncludePattern: 'target/jsonReports/*.json'
-
             publishHTML(target: [
                 reportName: 'Cucumber HTML Report',
-                reportDir: 'target/cucumber-html',
-                reportFiles: 'overview-features.html',
+                reportDir: 'target/cucumber-html-reports',   // <- updated to match your TestRunner plugin output folder
+                reportFiles: 'index.html',                     // main file for HTML report (usually index.html or overview-features.html)
                 keepAll: true,
                 alwaysLinkToLastBuild: true,
                 allowMissing: false
             ])
 
-            echo "🔗 Cucumber HTML Report available at: ${env.BUILD_URL}HTML_Report/overview-features.html"
+            // Construct the report URL
+            def reportUrl = "${env.BUILD_URL}publishHTML/Cucumber%20HTML%20Report/"
+
+            // Print a visually distinct box with the report URL in the console output
+            echo """
++-------------------------------------------------------------+
+|                       📝 CUCUMBER REPORT                     |
+|                                                             |
+|  ${reportUrl}  |
++-------------------------------------------------------------+
+"""
 
             cleanWs()
         }

@@ -9,19 +9,15 @@ import org.testng.annotations.DataProvider;
         glue = {"KingsleyGate.StepDef"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-html-reports",
+                "html:target/cucumber-html-reports",  // Make sure folder matches Jenkins publishHTML targetDir
                 "json:target/jsonReports/cucumber.json"
         },
         monochrome = true
 )
-
-
-public class TestRunner extends AbstractTestNGCucumberTests
-{
+public class TestRunner extends AbstractTestNGCucumberTests {
 
     @DataProvider
-    public Object[][] scenario()
-    {
+    public Object[][] scenario() {
         return super.scenarios();
     }
 }
