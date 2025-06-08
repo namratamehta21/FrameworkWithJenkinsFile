@@ -59,7 +59,7 @@ pipeline {
 
             publishHTML(target: [
                 reportName: 'Cucumber HTML Report',
-                reportDir: 'target/cucumber-html-reports',
+                reportDir: 'target/cucumber-html',   // ✅ Updated path
                 reportFiles: 'overview-features.html',
                 keepAll: true,
                 alwaysLinkToLastBuild: true,

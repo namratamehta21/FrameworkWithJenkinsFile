@@ -101,7 +101,7 @@
             <configuration>
               <projectName>KingsleyGate Automation</projectName>
               <skip>false</skip>
-              <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+              <outputDirectory>${project.build.directory}/cucumber-html</outputDirectory> <!-- ✅ Changed -->
               <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>
               <jsonFiles>
                 <param>**/*.json</param>
@@ -113,6 +113,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 </project>
