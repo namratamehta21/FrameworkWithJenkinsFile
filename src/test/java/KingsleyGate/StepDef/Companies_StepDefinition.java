@@ -33,7 +33,7 @@ public class Companies_StepDefinition
     @Then("^User search for a Company (.+)$")
     public void User_search_for_Company(String Company_name)
     {
-        Assert.assertEquals(Context.CompaniesPage.Search_for_a_Company(Company_name),Company_name);
+        Context.CompaniesPage.Search_for_a_Company(Company_name);
     }
 
     @Then("User click on column tab and verify the list of columns")

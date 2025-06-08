@@ -45,23 +45,9 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up workspace...'
+            cucumber buildStatus: 'UNSTABLE', fileIncludePattern: '**/cucumber.json'
+            publishHTML(...)
             cleanWs()
-
-            publishHTML (target: [
-                allowMissing: true,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'Reports',
-                reportFiles: 'cucumber-reports.html',
-                reportName: 'Cucumber HTML Report'
-            ])
-        }
-        success {
-            echo 'Build and tests ran successfully.'
-        }
-        failure {
-            echo 'Build failed. Please check the console output for errors.'
         }
     }
 }
