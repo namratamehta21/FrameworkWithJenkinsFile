@@ -36,32 +36,32 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo 'Archiving report artifacts...'
+   post {
+       always {
+           echo 'Archiving report artifacts...'
 
-            publishHTML(target: [
-                reportName: 'Cucumber HTML Report',
-                reportDir: 'target/cucumber-html-reports',   // <- updated to match your TestRunner plugin output folder
-                reportFiles: 'index.html',                     // main file for HTML report (usually index.html or overview-features.html)
-                keepAll: true,
-                alwaysLinkToLastBuild: true,
-                allowMissing: false
-            ])
+           publishHTML(target: [
+               reportName: 'Cucumber HTML Report',
+               reportDir: 'target/cucumber-html-reports',
+               reportFiles: 'index.html',
+               keepAll: true,
+               alwaysLinkToLastBuild: true,
+               allowMissing: false
+           ])
 
-            // Construct the report URL
-            def reportUrl = "${env.BUILD_URL}publishHTML/Cucumber%20HTML%20Report/"
+           script {
+               def reportUrl = "${env.BUILD_URL}publishHTML/Cucumber%20HTML%20Report/"
+               echo """
+   +-------------------------------------------------------------+
+   |                       📝 CUCUMBER REPORT                     |
+   |                                                             |
+   |  ${reportUrl}  |
+   +-------------------------------------------------------------+
+   """
+           }
 
-            // Print a visually distinct box with the report URL in the console output
-            echo """
-+-------------------------------------------------------------+
-|                       📝 CUCUMBER REPORT                     |
-|                                                             |
-|  ${reportUrl}  |
-+-------------------------------------------------------------+
-"""
+           cleanWs()
+       }
+   }
 
-            cleanWs()
-        }
-    }
 }
