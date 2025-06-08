@@ -10,8 +10,8 @@ import org.testng.annotations.DataProvider;
                 glue = {"KingsleyGate.StepDef"},
                 plugin = {
                         "pretty",
-                        "html:Reports/cucumber-reports.html",
-                        "json:Json/cucumber.json"
+                        "html:target/cucumber-html-reports",
+                        "json:target/jsonReports/cucumber.json"
                 },
                 monochrome = true)
 

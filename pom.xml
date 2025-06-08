@@ -81,6 +81,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version> <!-- Or your preferred version -->
         <configuration>
           <testFailureIgnore>true</testFailureIgnore>
         </configuration>
@@ -98,18 +99,13 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <projectName>cucumber-jvm-example</projectName>
+              <projectName>KingsleyGate Automation</projectName>
               <skip>false</skip>
-              <outputDirectory>${project.build.directory}</outputDirectory>
+              <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
               <inputDirectory>${project.build.directory}/jsonReports</inputDirectory>
               <jsonFiles>
                 <param>**/*.json</param>
               </jsonFiles>
-              <classificationDirectory>${project.build.directory}/classifications</classificationDirectory>
-              <classificationFiles>
-                <param>sample.properties</param>
-                <param>other.properties</param>
-              </classificationFiles>
               <mergeFeaturesById>false</mergeFeaturesById>
               <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
               <checkBuildResult>false</checkBuildResult>
@@ -119,5 +115,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

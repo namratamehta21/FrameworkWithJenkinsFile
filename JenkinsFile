@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'  // Ensure this matches Jenkins global tool config
+        maven 'Maven'
     }
 
     environment {
@@ -35,19 +35,7 @@ pipeline {
         stage('Generate Cucumber HTML Report') {
             steps {
                 echo 'Generating Cucumber HTML report from JSON...'
-
-                // Make sure HTML report is generated here before publishing
-                // Replace below command with your actual report generation step if different
-                sh '''
-                # Example: using cucumber-reporting-maven-plugin or any tool that converts JSON to HTML
-                # mvn cucumber-reporting:report
-                # or a custom script to generate HTML report from JSON
-
-                # If using a custom script:
-                # ./generate-cucumber-html-report.sh
-
-                echo "Assuming the HTML report is generated at target/cucumber-html-reports"
-                '''
+                sh 'mvn verify'
             }
         }
 
@@ -55,7 +43,7 @@ pipeline {
             steps {
                 echo 'Publishing Cucumber JSON dashboard report...'
                 cucumber buildStatus: 'UNSTABLE',
-                         fileIncludePattern: 'target/cucumber-html-reports/Json/cucumber.json', // Adjust path if needed
+                         fileIncludePattern: 'target/jsonReports/*.json',
                          sortingMethod: 'ALPHABETICAL',
                          trendsLimit: 10
             }
@@ -66,25 +54,22 @@ pipeline {
         always {
             echo 'Archiving report artifacts...'
 
-            // Archive JSON reports for trend graphs and history
-            cucumber buildStatus: 'UNSTABLE', fileIncludePattern: 'target/cucumber-html-reports/Json/cucumber.json'
+            cucumber buildStatus: 'UNSTABLE',
+                     fileIncludePattern: 'target/jsonReports/*.json'
 
-            // Publish the generated HTML report inside Jenkins UI
             publishHTML(target: [
                 reportName: 'Cucumber HTML Report',
                 reportDir: 'target/cucumber-html-reports',
-                reportFiles: 'overview-features.html',  // Make sure this is the correct entry HTML file
+                reportFiles: 'overview-features.html',
                 keepAll: true,
                 alwaysLinkToLastBuild: true,
                 allowMissing: false
             ])
 
-            // Print clickable Jenkins HTML report URL to console
             script {
                 echo "🔗 Cucumber HTML Report: ${env.BUILD_URL}HTML_Report/"
             }
 
-            // Clean workspace after archiving
             cleanWs()
         }
     }
