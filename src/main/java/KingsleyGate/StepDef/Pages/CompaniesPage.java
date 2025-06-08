@@ -80,7 +80,7 @@ public class CompaniesPage extends AbstractComponents
     {
         SearchFieldCompany.sendKeys(Company_Name);
         SearchBtn.click();
-        waitForPageToLoad(AnyOneCompany);
+        waitForWebElementToBeClickable(AnyOneCompany);
         return AnyOneCompany.getText();
     }
 
