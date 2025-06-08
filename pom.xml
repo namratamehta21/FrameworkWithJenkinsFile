@@ -1,94 +1,65 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
   <artifactId>KingsleyGate</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>KingsleyGate</name>
-  <url>http://maven.apache.org</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
   </properties>
 
   <dependencies>
-    <!-- TestNG -->
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>7.11.0</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- Cucumber core dependencies -->
+    <!-- Cucumber Dependencies -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>7.22.0</version>
+      <version>7.14.0</version>
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-testng</artifactId>
-      <version>7.22.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-picocontainer</artifactId>
-      <version>7.22.0</version>
+      <version>7.14.0</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>7.22.0</version>
+      <version>7.14.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+    <!-- TestNG -->
     <dependency>
-      <groupId>com.aventstack</groupId>
-      <artifactId>extentreports</artifactId>
-      <version>5.1.2</version>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.9.0</version>
+      <scope>test</scope>
     </dependency>
+
     <!-- Selenium -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.31.0</version>
-    </dependency>
-
-    <!-- WebDriver Manager -->
-    <dependency>
-      <groupId>io.github.bonigarcia</groupId>
-      <artifactId>webdrivermanager</artifactId>
-      <version>6.1.0</version>
-    </dependency>
-
-    <!-- Apache POI (optional for Excel handling) -->
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>5.4.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>5.4.1</version>
+      <version>4.21.0</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Surefire for TestNG -->
+      <!-- Maven Surefire for TestNG -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M7</version>
         <configuration>
-          <testFailureIgnore>true</testFailureIgnore>
+          <includes>
+            <include>**/TestRunner.java</include>
+          </includes>
+          <testFailureIgnore>false</testFailureIgnore>
         </configuration>
       </plugin>
     </plugins>
