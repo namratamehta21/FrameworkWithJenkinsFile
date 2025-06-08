@@ -2,35 +2,35 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
+        maven 'Maven' // Make sure 'Maven' is configured in Jenkins tools
     }
 
     environment {
         BROWSER = 'chrome'
         HEADLESS = 'true'
-        CUCUMBER_PUBLISH_ENABLED = 'true'
-        CUCUMBER_PUBLISH_QUIET = 'false' // set to 'true' if you want minimal logs
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
-                echo 'Cloning repository...'
-                git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'master'
+                echo '🔄 Cloning repository...'
+                git credentialsId: 'bitbucket-creds',
+                    url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git',
+                    branch: 'master'
             }
         }
 
-        stage('Run Tests and Auto-Publish Cucumber Report') {
+        stage('Run Tests') {
             steps {
-                echo "Running tests using browser: ${BROWSER}, headless: ${HEADLESS}"
-                sh "mvn verify -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
+                echo "🚀 Running tests using browser: ${BROWSER}"
+                sh "mvn test -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
             }
         }
     }
 
     post {
         always {
-            echo 'Cleaning up workspace...'
+            echo "✅ If Cucumber Publish was enabled, you'll see a report link above ☝"
             cleanWs()
         }
     }
