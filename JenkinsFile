@@ -50,28 +50,26 @@ pipeline {
         }
     }
 
+    // ✅ This must be OUTSIDE the stages block
     post {
-   post {
-       always {
-           echo 'Archiving report artifacts...'
+        always {
+            echo 'Archiving report artifacts...'
 
-           cucumber buildStatus: 'UNSTABLE',
-                    fileIncludePattern: 'target/jsonReports/*.json'
+            cucumber buildStatus: 'UNSTABLE',
+                     fileIncludePattern: 'target/jsonReports/*.json'
 
-           publishHTML(target: [
-               reportName: 'Cucumber HTML Report',
-               reportDir: 'target/cucumber-html',
-               reportFiles: 'overview-features.html',
-               keepAll: true,
-               alwaysLinkToLastBuild: true,
-               allowMissing: false
-           ])
+            publishHTML(target: [
+                reportName: 'Cucumber HTML Report',
+                reportDir: 'target/cucumber-html',
+                reportFiles: 'overview-features.html',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: false
+            ])
 
-           echo "🔗 Cucumber HTML Report available at: ${env.BUILD_URL}HTML_Report/overview-features.html"
+            echo "🔗 Cucumber HTML Report available at: ${env.BUILD_URL}HTML_Report/overview-features.html"
 
-           cleanWs()
-       }
-   }
-
-}
+            cleanWs()
+        }
+    }
 }
