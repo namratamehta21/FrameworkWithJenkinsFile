@@ -10,8 +10,7 @@ import org.testng.annotations.DataProvider;
         plugin = {
                 "pretty",
                 "html:target/cucumber-html-reports",
-                "json:target/jsonReports/cucumber.json",
-                "io.cucumber.plugin.Publish"  // 🔗 Publishes to reports.cucumber.io
+                "json:target/jsonReports/cucumber.json"
         },
         monochrome = true
 )
