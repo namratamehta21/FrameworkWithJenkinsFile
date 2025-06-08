@@ -9,10 +9,12 @@ import org.testng.annotations.DataProvider;
         glue = {"KingsleyGate.StepDef"},
         plugin = {
                 "pretty",
-                "io.cucumber.plugin.Publish"
+                "json:Json/cucumber.json",  // JSON report output path
+                "html:Reports/cucumber-reports.html"           // Optional default HTML report
         },
         monochrome = true
 )
+
 public class TestRunner extends AbstractTestNGCucumberTests {
 
     @DataProvider
