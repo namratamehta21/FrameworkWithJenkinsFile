@@ -15,7 +15,7 @@ Feature:Tags Setup
 
     Examples:
     | Email                                  | Password      | TagName   | Color |PopupMsg                 |
-    |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Testing138| #333  |Tag created successfully!|
+    |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Testing151| #333  |Tag created successfully!|
 
   @regression
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
@@ -25,4 +25,4 @@ Feature:Tags Setup
     Then User search for TagName <TagName> and then delete the Tag
     Examples:
       | Email                                  | Password      | TagName   |
-      |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Testing138|
+      |ykadam+automationtester@kingsleygate.com| fSog0P3kEP03! | Testing151|
