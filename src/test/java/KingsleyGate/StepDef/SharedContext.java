@@ -4,6 +4,7 @@ import KingsleyGate.StepDef.Pages.CompaniesPage;
 import KingsleyGate.StepDef.Pages.ContactsPage;
 import KingsleyGate.StepDef.Pages.LoginPage;
 import KingsleyGate.StepDef.Pages.TagsSetupPage;
+import KingsleyGate.StepDef.Pages.StageSetUpPage;
 
 public class SharedContext
 {
@@ -11,6 +12,7 @@ public class SharedContext
     ContactsPage CP;
     CompaniesPage CompaniesPage;
     TagsSetupPage tagsSetupPage;
+    StageSetUpPage stageSetUpPage;
 
     public void initializePages()
     {
