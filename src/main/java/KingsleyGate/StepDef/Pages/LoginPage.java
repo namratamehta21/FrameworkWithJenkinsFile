@@ -43,6 +43,11 @@ public class LoginPage extends AbstractComponents
         CompaniesPage Companies_Page=new CompaniesPage(driver);
         return Companies_Page;
     }
+    public TagsSetupPage Logging_TagsSetup_Page()
+    {
+        TagsSetupPage tagsSetupPage=new TagsSetupPage(driver);
+        return tagsSetupPage;
+    }
 
     public String Verifying_Home_Page()
     {

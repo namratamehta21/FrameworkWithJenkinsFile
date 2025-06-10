@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class AbstractComponents
 {
@@ -46,4 +47,15 @@ public class AbstractComponents
                         .executeScript("return document.readyState").equals("complete")
         );
     }
+
+    public void waitUntilAttributeValue(WebElement element, String attribute, String expectedValue) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> expectedValue.equals(element.getAttribute(attribute)));
+    }
+
+    public void waitForWebElementsToAppear(List<WebElement> elements) {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(driver -> elements.stream().allMatch(WebElement::isDisplayed));
+    }
+
 }
