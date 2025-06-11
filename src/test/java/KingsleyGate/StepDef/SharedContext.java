@@ -12,7 +12,7 @@ public class SharedContext
     ContactsPage CP;
     CompaniesPage CompaniesPage;
     TagsSetupPage tagsSetupPage;
-    StageSetUpPage stageSetUpPage;
+    StageSetUpPage StageSetUpPage;
 
     public void initializePages()
     {
