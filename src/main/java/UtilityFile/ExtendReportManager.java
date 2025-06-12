@@ -28,7 +28,7 @@ public class ExtendReportManager implements ITestListener
 		repName="Igyte_Automation_Report.html";
 				
 		sparkReporter=new ExtentSparkReporter("/ext_reports/"+repName);//specify location of the report
-		System.out.println("Testing extend report execution : "+sparkReporter.toString());		
+		System.out.println("Testing extend report execution");		
 		sparkReporter.config().setDocumentTitle("Ignyte Project"); // Title of report
 		sparkReporter.config().setReportName("Ignyte API"); // name of the report
 		sparkReporter.config().setTheme(Theme.DARK);
@@ -47,6 +47,7 @@ public class ExtendReportManager implements ITestListener
 	
 	public void onTestSuccess(ITestResult result)
 	{
+		System.out.println("Test Passed: " + result.getName());
 		test=extent.createTest(result.getName());
 		test.assignCategory(result.getMethod().getGroups());
 		test.createNode(result.getName());
@@ -55,6 +56,7 @@ public class ExtendReportManager implements ITestListener
 	
 	public void onTestFailure(ITestResult result)
 	{
+		System.out.println("Test Failed: " + result.getName());
 		test=extent.createTest(result.getName()); 
 		test.createNode(result.getName());
 		test.assignCategory(result.getMethod().getGroups());
@@ -64,6 +66,8 @@ public class ExtendReportManager implements ITestListener
 	
 	public void onTestSkipped(ITestResult result)
 	{
+		System.out.println("Test Skipped: " + result.getName());
+
 		test=extent.createTest(result.getName()); 
 		test.createNode(result.getName());
 		test.assignCategory(result.getMethod().getGroups());
@@ -73,6 +77,8 @@ public class ExtendReportManager implements ITestListener
 	
 	public void onFinish(ITestContext testContext)
 	{
+		System.out.println("Test Completed");
+
 		if (extent != null) {
 		extent.flush(); // this make everything ready in the report. If we dont call this method, report will not be generated
 	}}
