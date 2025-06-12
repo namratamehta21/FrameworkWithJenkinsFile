@@ -29,15 +29,16 @@ pipeline {
         }
     }
 	post {
-        always {      
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'ext_reports',
-                reportFiles: 'index.html',          // CHANGED
-                reportName: 'Extent Report'
-            ])
+        success {
+            publishHTML([allowMissing: false, 
+            alwaysLinkToLastBuild: false, 
+            icon: '', 
+            keepAll: false,
+            reportDir: 'ext_reports', 
+            reportFiles: 'index.html', 
+            reportName: 'Automation Build Report', 
+            reportTitles: '', 
+            useWrapperFileDirectly: true])
         }
     }
 }
