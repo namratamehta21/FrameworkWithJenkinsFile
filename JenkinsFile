@@ -9,10 +9,9 @@ pipeline {
         BROWSER = 'chrome'
         HEADLESS = 'true'
         CUCUMBER_PUBLISH_ENABLED = 'true'
-        CUCUMBER_PUBLISH_QUIET = 'false' // set to 'true' if you want minimal logs
+        CUCUMBER_PUBLISH_QUIET = 'false'
     }
 
-	
     stages {
         stage('Checkout') {
             steps {
@@ -21,16 +20,25 @@ pipeline {
             }
         }
 
-        stage('Run Tests and Auto-Publish Cucumber Report') {
+        stage('Run Tests and Generate Report') {
             steps {
                 echo "Running tests using browser: ${BROWSER}, headless: ${HEADLESS}"
                 sh "mvn verify -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
+                sh 'ls -l ext_reports' // optional: verify report exists
             }
         }
     }
-	post {
-        success {
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'ext_reports', reportFiles: 'Igyte_Automation_Report.html', reportName: 'Automation Build Report', reportTitles: '', useWrapperFileDirectly: true])
+
+    post {
+        always {
+            publishHTML([
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'ext_reports',
+                reportFiles: 'Igyte_Automation_Report.html',
+                reportName: 'Extent Report'
+            ])
         }
     }
 }
