@@ -1,4 +1,7 @@
 target/
+ext_reports/
+reportss/
+.idea
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -36,5 +39,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-.ext_reports
-.reportss
