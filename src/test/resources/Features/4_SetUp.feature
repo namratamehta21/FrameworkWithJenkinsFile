@@ -11,7 +11,7 @@ Feature: Set Up Page
 
     Examples:
      |Email      |Password      | StageCode   | StageLabel    |Colour   |SequenceNumber | ReasonLookup     | ShortDescription |
-     |user_email |user_password |Testing002   | Testing002    | #03ebeb |  1111         |COMPANY_ATTRIBUTES|Automation Purpose|
+     |user_email |user_password |Testing003   | Testing003    | #03ebeb |  1111         |COMPANY_ATTRIBUTES|Automation Purpose|
 
 
   @AddStage
@@ -23,4 +23,4 @@ Feature: Set Up Page
 
     Examples:
       |Email      |Password      | StageCode   |
-      |user_email |user_password |Testing002   |
+      |user_email |user_password |Testing003   |
