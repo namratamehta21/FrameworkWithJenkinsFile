@@ -28,8 +28,8 @@ public class ExtendReportManager implements ITestListener
 		repName="Test-Report-"+timeStamp+".html";
 				
 		sparkReporter=new ExtentSparkReporter(".\\ext_reports\\"+repName);//specify location of the report
-				
-		sparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
+		System.out.println(sparkReporter.toString());		
+		sparkReporter.config().setDocumentTitle("Ignyte Project"); // Title of report
 		sparkReporter.config().setReportName("Ignyte API"); // name of the report
 		sparkReporter.config().setTheme(Theme.DARK);
 				
