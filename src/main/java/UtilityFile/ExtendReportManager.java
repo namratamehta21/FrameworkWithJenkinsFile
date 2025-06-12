@@ -27,7 +27,7 @@ public class ExtendReportManager implements ITestListener
 		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());//time stamp
 		repName="Test-Report-"+timeStamp+".html";
 				
-		sparkReporter=new ExtentSparkReporter(".\\reportss\\"+repName);//specify location of the report
+		sparkReporter=new ExtentSparkReporter(".\\ext_reports\\"+repName);//specify location of the report
 				
 		sparkReporter.config().setDocumentTitle("RestAssuredAutomationProject"); // Title of report
 		sparkReporter.config().setReportName("Ignyte API"); // name of the report
