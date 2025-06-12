@@ -12,6 +12,7 @@ pipeline {
         CUCUMBER_PUBLISH_QUIET = 'false' // set to 'true' if you want minimal logs
     }
 
+	
     stages {
         stage('Checkout') {
             steps {
@@ -27,5 +28,9 @@ pipeline {
             }
         }
     }
-
+	post {
+        success {
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'ext_reports', reportFiles: 'Test-Report-2025.06.12.13.40.07.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+        }
+    }
 }
