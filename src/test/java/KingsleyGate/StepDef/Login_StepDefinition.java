@@ -39,6 +39,7 @@ public class Login_StepDefinition
         Context.CP = Context.LP.Logging_Ignyte_App(email, password);
         Context.CompaniesPage = Context.LP.Logging_Companies_Page();
         Context.tagsSetupPage = Context.LP.Logging_TagsSetup_Page();
+        Context.StageSetUpPage=Context.LP.Logging_StageSetUp_Page();
     }
 
     @Then("^User Logged in succesfully in Ignyte App and match the title (.+) of the home page$")
