@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'extendReportIntegration'
+                git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'extentReportIntegration'
             }
         }
 
