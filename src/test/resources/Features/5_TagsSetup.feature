@@ -14,7 +14,7 @@ Feature:Tags Setup
 
     Examples:
     | Email                                  | Password      | TagName   | Color  |PopupMsg                 |
-    |user_email                              | user_password | Testing160| #333   |Tag created successfully!|
+    |user_email                              | user_password | Testing161| #333   |Tag created successfully!|
 
   @SetUp
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
@@ -24,4 +24,4 @@ Feature:Tags Setup
     Then User search for TagName <TagName> and then delete the Tag
     Examples:
        | Email                                  | Password      | TagName   |
-       |user_email                              | user_password | Testing160|
+       |user_email                              | user_password | Testing161|
