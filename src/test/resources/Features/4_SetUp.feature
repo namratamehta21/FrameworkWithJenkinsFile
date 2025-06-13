@@ -1,7 +1,7 @@
-@IgnyteApplication
+@SetUp
 Feature: Set Up Page
 
-  @AddStage
+  @SetUp
   Scenario Outline: Add a new stage in application
     Given User landed on Ignyte App
     When User logged in with valid Email <Email> and Password <Password>
@@ -11,10 +11,10 @@ Feature: Set Up Page
 
     Examples:
      |Email      |Password      | StageCode   | StageLabel    |Colour   |SequenceNumber | ReasonLookup     | ShortDescription |
-     |user_email |user_password |Testing003   | Testing003    | #03ebeb |  1111         |COMPANY_ATTRIBUTES|Automation Purpose|
+     |user_email |user_password |Testing004   | Testing004    | #03ebeb |  1111         |COMPANY_ATTRIBUTES|Automation Purpose|
 
 
-  @AddStage
+  @SetUp
   Scenario Outline: Disabling the Newly added stage in the application
     Given User landed on Ignyte App
     When User logged in with valid Email <Email> and Password <Password>
@@ -23,4 +23,4 @@ Feature: Set Up Page
 
     Examples:
       |Email      |Password      | StageCode   |
-      |user_email |user_password |Testing003   |
+      |user_email |user_password |Testing004   |
