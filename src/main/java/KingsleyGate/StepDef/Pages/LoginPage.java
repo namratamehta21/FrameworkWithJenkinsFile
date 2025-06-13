@@ -48,6 +48,11 @@ public class LoginPage extends AbstractComponents
         TagsSetupPage tagsSetupPage=new TagsSetupPage(driver);
         return tagsSetupPage;
     }
+    public StageSetUpPage Logging_StageSetUp_Page()
+    {
+        StageSetUpPage stageSetUpPage= new StageSetUpPage(driver);
+        return stageSetUpPage;
+    }
 
     public String Verifying_Home_Page()
     {

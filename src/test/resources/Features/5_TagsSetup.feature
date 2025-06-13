@@ -4,7 +4,7 @@ Feature:Tags Setup
   @SetUp
   Scenario Outline: User navigates to Tags Setup page and add a new Tag
     Given User landed on Ignyte App
-    When User logged in With valid Email <Email> and Password <Password>
+    When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
     Then User clicks on Add button to create a new tag
     Then User fill the TagName <TagName> Field and select a Color for Tag <Color>

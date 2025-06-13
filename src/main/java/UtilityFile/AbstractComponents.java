@@ -58,4 +58,9 @@ public class AbstractComponents
                 .until(driver -> elements.stream().allMatch(WebElement::isDisplayed));
     }
 
+    public void waitForElementToAppear(String xpath)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+    }
 }

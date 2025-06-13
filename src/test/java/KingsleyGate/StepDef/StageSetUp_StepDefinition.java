@@ -14,12 +14,24 @@ public class StageSetUp_StepDefinition
 	    @Then("User navigates to Set Up menu and click on add a new stage")
 	    public void user_navigates_to_setUp_page() throws InterruptedException
 	    {
-	        Context.stageSetUpPage.goToStageScreen();
+			Context.StageSetUpPage.Navigating_To_StageSetupClickOnAddStage();
 	    }
 
-	    @Then("^User provides a valid stage set up details (.+) (.+) (.+) and (.+)$")
-	    public void user_provides_a_valid_details(String StageCode, String StageLabel, String Colour, String SequenceNumber)
+	    @Then("^User provides a valid stage set up details (.+) (.+) (.+) (.+) (.+) and (.+)$")
+	    public void user_provides_a_valid_details(String StageCode, String StageLabel, String Colour, String SequenceNumber, String ReasonLookup, String ShortDescription)
 	    {
-	        Context.stageSetUpPage.enterStageDetails(StageCode, StageLabel, Colour, SequenceNumber);
+			Context.StageSetUpPage.CreatingStageWithDetails(StageCode,StageLabel,Colour,SequenceNumber,ReasonLookup,ShortDescription);
 	    }
+
+	@Then("^User navigates to Set Up menu and search for the stage (.+)$")
+	public void userNavigatesToSetUpMenuAndSearchForTheStageStageCode(String StageCode)
+	{
+		Context.StageSetUpPage.SearchStage(StageCode);
+	}
+
+	@Then("User disable the stage")
+	public void userDisableTheStage()
+	{
+		Context.StageSetUpPage.disableStage();
+	}
 }
