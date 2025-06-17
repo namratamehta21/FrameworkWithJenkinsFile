@@ -17,7 +17,7 @@ Feature: Tags Setup
 
     Examples:
       | Email         | Password      | TagName    | Color | PopupMsg                 |
-      | user_email    | user_password | Testing167 | #333  | Tag created successfully!|
+      | user_email    | user_password | Testing168 | #333  | Tag created successfully!|
 
   @TagSetUp
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
@@ -27,4 +27,4 @@ Feature: Tags Setup
 
     Examples:
       | Email         | Password      | TagName    |
-      | user_email    | user_password | Testing167 |
+      | user_email    | user_password | Testing168 |
