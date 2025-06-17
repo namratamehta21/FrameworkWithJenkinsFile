@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -86,7 +85,7 @@ public class TagsSetupPage extends AbstractComponents
     WebElement DeleteTagBtn;
 
     public void Navigate_Setup_TagsSetup()
-    {
+    {	
         waitForWebElementToAppear(Menu);
         Menu.click();
         waitForWebElementToAppear(SetupModuleIcon);
@@ -102,8 +101,8 @@ public class TagsSetupPage extends AbstractComponents
         AddTagsBtn.click();
     }
 
-    public void GiveDetailsOfTags(String TagName, String Color) {
-
+    public void GiveDetailsOfTags(String TagName, String Color) 
+    {
         waitForWebElementToAppear(TagNameField);
         TagNameField.sendKeys(TagName);
         waitForWebElementToAppear(ColorDropdownInput);

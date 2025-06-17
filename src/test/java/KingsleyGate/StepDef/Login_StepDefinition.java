@@ -1,13 +1,10 @@
 package KingsleyGate.StepDef;
 
-import KingsleyGate.StepDef.Pages.LoginPage;
 import TestComponents.HooksClass;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.poi.ss.extractor.ExcelExtractor;
 import org.testng.Assert;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -25,6 +22,7 @@ public class Login_StepDefinition
     public void user_landed_on_ignyte_app() throws IOException
     {
         Context.LP=new HooksClass().launchApp();
+        
     }
     @When("^User logged in with valid Email (.+) and Password (.+)$")
     public void user_logged_in_with_valid_email_and_password(String emailKey, String passwordKey) throws IOException {

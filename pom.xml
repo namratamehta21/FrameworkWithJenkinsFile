@@ -58,6 +58,17 @@
       <artifactId>extentreports</artifactId>
       <version>5.1.2</version>
     </dependency>
+    <dependency>
+    <groupId>tech.grasshopper</groupId>
+    <artifactId>extentreports-cucumber7-adapter</artifactId>
+    <version>1.7.0</version>
+    <exclusions>
+        <exclusion>
+            <groupId>tech.grasshopper</groupId>
+            <artifactId>extent-pdf-report</artifactId>
+        </exclusion>
+    </exclusions>
+	</dependency>
     <!-- WebDriver Manager -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>

@@ -1,24 +1,19 @@
 package Runner;
 
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-
-import UtilityFile.ExtendReportManager;
-
-
-@Listeners(ExtendReportManager.class)  
 
 @CucumberOptions(
         features = "src/test/resources/Features",
-        glue = {"KingsleyGate.StepDef"},
+        glue = {"KingsleyGate.StepDef","TestComponents"},
         plugin = {
                 "pretty",
-                "json:target/cucumber-report.json"
-
+                "json:target/cucumber-report.json",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
-        tags = ("@SetUp"),
+        tags = "@SetUp or @SetUp2 or @SetUp1",
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {

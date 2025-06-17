@@ -1,9 +1,12 @@
-@SetUp
-Feature:Tags Setup
+Feature: Tags Setup
+  I want to create a new tag and delete the same
+
+  Background:
+    Given User landed on Ignyte App
+   
 
   @SetUp
   Scenario Outline: User navigates to Tags Setup page and add a new Tag
-    Given User landed on Ignyte App
     When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
     Then User clicks on Add button to create a new tag
@@ -13,15 +16,15 @@ Feature:Tags Setup
     Then User Add tag <TagName> to Contact and then verifies PopupMsg <PopupMsg>
 
     Examples:
-    | Email                                  | Password      | TagName   | Color  |PopupMsg                 |
-    |user_email                              | user_password | Testing161| #333   |Tag created successfully!|
+      | Email         | Password      | TagName    | Color | PopupMsg                 |
+      | user_email    | user_password | Testing165 | #333  | Tag created successfully!|
 
-  @SetUp
+  @SetUp2
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
-    Given User landed on Ignyte App
     When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
     Then User search for TagName <TagName> and then delete the Tag
+
     Examples:
-       | Email                                  | Password      | TagName   |
-       |user_email                              | user_password | Testing161|
+      | Email         | Password      | TagName    |
+      | user_email    | user_password | Testing165 |
