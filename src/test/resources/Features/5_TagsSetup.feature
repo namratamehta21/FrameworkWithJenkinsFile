@@ -5,7 +5,7 @@ Feature: Tags Setup
     Given User landed on Ignyte App
    
 
-  @SetUp
+  @TagSetUp
   Scenario Outline: User navigates to Tags Setup page and add a new Tag
     When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
@@ -17,9 +17,9 @@ Feature: Tags Setup
 
     Examples:
       | Email         | Password      | TagName    | Color | PopupMsg                 |
-      | user_email    | user_password | Testing166 | #333  | Tag created successfully!|
+      | user_email    | user_password | Testing167 | #333  | Tag created successfully!|
 
-  @SetUp2
+  @TagSetUp
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
     When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
@@ -27,4 +27,4 @@ Feature: Tags Setup
 
     Examples:
       | Email         | Password      | TagName    |
-      | user_email    | user_password | Testing166 |
+      | user_email    | user_password | Testing167 |
