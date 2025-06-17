@@ -13,7 +13,7 @@ Feature: Set Up Page
 
     Examples:
       | Email      | Password      | StageCode   | StageLabel | Colour  | SequenceNumber | ReasonLookup      | ShortDescription   |
-      | user_email | user_password | Testing011  | Testing011 | #03ebeb | 1111           | COMPANY_ATTRIBUTES | Automation Purpose |
+      | user_email | user_password | Testing012  | Testing012 | #03ebeb | 1111           | COMPANY_ATTRIBUTES | Automation Purpose |
 
   @SetUp1
   Scenario Outline: Disabling the Newly added stage in the application
@@ -23,4 +23,4 @@ Feature: Set Up Page
 
     Examples:
       | Email      | Password      | StageCode  |
-      | user_email | user_password | Testing011 |
+      | user_email | user_password | Testing012 |
