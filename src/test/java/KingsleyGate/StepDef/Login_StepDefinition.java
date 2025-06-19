@@ -24,15 +24,15 @@ public class Login_StepDefinition
         Context.LP=new HooksClass().launchApp();
         
     }
-    @When("^User logged in with valid Email (.+) and Password (.+)$")
-    public void user_logged_in_with_valid_email_and_password(String emailKey, String passwordKey) throws IOException {
+    @Then("^User logged in with valid email and password$")
+    public void user_logged_in_with_valid_email_and_password() throws IOException {
         Properties prop = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
                 + "/src/main/java/Resources/Global.properties");
         prop.load(fis);
 
-        String email = prop.getProperty(emailKey);
-        String password = prop.getProperty(passwordKey);
+        String email = prop.getProperty("user_email");
+        String password = prop.getProperty("user_password");
 
         Context.CP = Context.LP.Logging_Ignyte_App(email, password);
         Context.CompaniesPage = Context.LP.Logging_Companies_Page();

@@ -3,11 +3,10 @@ Feature: Tags Setup
 
   Background:
     Given User landed on Ignyte App
-   
+    Then User logged in with valid email and password
 
   @TagSetUp
   Scenario Outline: User navigates to Tags Setup page and add a new Tag
-    When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
     Then User clicks on Add button to create a new tag
     Then User fill the TagName <TagName> Field and select a Color for Tag <Color>
@@ -16,15 +15,14 @@ Feature: Tags Setup
     Then User Add tag <TagName> to Contact and then verifies PopupMsg <PopupMsg>
 
     Examples:
-      | Email         | Password      | TagName    | Color | PopupMsg                 |
-      | user_email    | user_password | Testing168 | #333  | Tag created successfully!|
+      | TagName    | Color | PopupMsg                 |
+      | Testing164 | #333  | Tag created successfully!|
 
   @TagSetUp
   Scenario Outline: User navigates to Tags Setup page and deletes a Tag
-    When User logged in with valid Email <Email> and Password <Password>
     Then User navigate to Setup module and select Tags Setup
     Then User search for TagName <TagName> and then delete the Tag
 
     Examples:
-      | Email         | Password      | TagName    |
-      | user_email    | user_password | Testing168 |
+      | TagName    |
+      | Testing164 |

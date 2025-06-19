@@ -13,7 +13,7 @@ import org.testng.annotations.DataProvider;
                 "json:target/cucumber-report.json",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
-        tags = "@StageSetUp or @TagSetUp",
+        tags = "@StageSetUp",
         monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
