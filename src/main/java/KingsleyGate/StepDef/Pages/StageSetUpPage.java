@@ -28,7 +28,7 @@ public class StageSetUpPage  extends AbstractComponents
 	@FindBy(xpath = "//div[normalize-space()='Stage Setup']")
 	WebElement StageSetupIcon;
 
-	@FindBy(xpath = "//button[contains(., 'Add Stage')]")
+	@FindBy(xpath = "//div[@class='d-flex justify-content-between']/div[2]/button/div")
 	WebElement AddStageBtn;
 
 	@FindBy(xpath = "//div[@id='stage-name']//input[@id='outlined-basic']")
@@ -55,7 +55,7 @@ public class StageSetUpPage  extends AbstractComponents
 	@FindBy(xpath = "//input[contains(@class, 'MuiAutocomplete-input')]")
 	WebElement StageSearch;
 
-	@FindBy(xpath = "//*[name()='svg' and contains(@class, 'moveVerticalIconStyle') and @data-testid='MoreVertIcon']")
+	@FindBy(xpath = "(//li[@id='lock-button'])[1]")
 	WebElement StageModificationBtn;
 
 	@FindBy(xpath = "//li[normalize-space()='Disable']")
@@ -70,12 +70,21 @@ public class StageSetUpPage  extends AbstractComponents
 		Menu.click();
 		waitForWebElementToAppear(StageSetupIcon);
 		StageSetupIcon.click();
-		waitForWebElementToAppear(AddStageBtn);
-		AddStageBtn.click();
+		
 	}
 
 	public void CreatingStageWithDetails(String StageCode, String StageLabel, String StageColor, String StageSequencNo, String StageReasonLookup, String StageShortDecription)
 	{
+		try 
+		{
+			Thread.sleep(5000);
+		} 
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+		waitForWebElementToAppear(AddStageBtn);
+		AddStageBtn.click();
 		waitForWebElementToAppear(stageCode);
 		stageCode.sendKeys(StageCode);
 		stageLabel.sendKeys(StageLabel);
@@ -108,10 +117,14 @@ public class StageSetUpPage  extends AbstractComponents
 		StageSetupIcon.click();
 		waitForWebElementToAppear(StageSearch);
 		StageSearch.sendKeys(StageCode);
-	}
-
-	public void disableStage()
-	{
+		try 
+		{
+			Thread.sleep(5000);
+		} 
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
 		waitForWebElementToAppear(StageModificationBtn);
 		StageModificationBtn.click();
 		waitForWebElementToAppear(StageDisableBtn);

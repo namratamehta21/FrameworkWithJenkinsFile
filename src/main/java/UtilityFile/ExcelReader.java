@@ -2,100 +2,121 @@ package UtilityFile;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
-public class ExcelReader {
+public class ExcelReader 
+{
+    private final String filePath;
 
-    private Sheet sheet;
-
-    public ExcelReader(String filePath, String sheetName) {
-        System.out.println("File path is : " + filePath);
-        System.out.println("Sheet name is : " + sheetName);
-        try (FileInputStream fis = new FileInputStream(filePath)) {
-            Workbook workbook = new XSSFWorkbook(fis);
-            sheet = workbook.getSheet(sheetName);
-            if (sheet == null) {
-                throw new RuntimeException("Sheet '" + sheetName + "' not found in Excel file.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load Excel sheet: " + e.getMessage());
-        }
+    public ExcelReader(String filePath)
+    {
+        this.filePath = filePath;
     }
 
-    public Map<String, String> getDataByScenario(String scenarioTitle) {
-        Map<String, String> data = new HashMap<>();
+    public List<Map<String, String>> readExcelData(String sheetName, String scenarioName) throws FileNotFoundException, IOException 
+    {
+    	System.out.println("Inside excel sheet reading part...!!!!!");
+       // Map<String, List<Map<String, String>>> scenarioDataMap = new LinkedHashMap<>();
 
-        if (sheet == null) {
-            throw new IllegalStateException("Sheet not initialized properly.");
-        }
+        try (FileInputStream fis = new FileInputStream(filePath);
+             Workbook workbook = new XSSFWorkbook(fis))
+        {
 
-        int lastRow = sheet.getLastRowNum();
-        boolean scenarioFound = false;
-        Map<Integer, String> headerIndex = new HashMap<>();
+        	Sheet sheet = workbook.getSheet(sheetName);
+            if (sheet == null) 
+            {
+                System.out.println("Sheet " + sheetName + " not found.");
+                return null;
+            }
+            System.out.println("Sheet " + sheetName + " found.");
+            
+            int totalRows = sheet.getPhysicalNumberOfRows()+1;
+            int scenarioRow = -1;
 
-        for (int i = 0; i <= lastRow; i++) {
-            Row row = sheet.getRow(i);
-            if (row == null) continue;
+            System.out.println("Total rowssssssssssssssss:::::::::::::::::"+totalRows);
+         // Find the row where the scenario name appears (in the first column, usually)
+            for (int i = 0; i < totalRows; i++) 
+            { // Start from 1 if row 0 is header
+                Row row = sheet.getRow(i);
+                
+                if (row == null) 
+                	continue; 
+                
+                 Cell cell = row.getCell(0); // Assuming scenario names are in first column
+                 
+                 if (cell != null) 
+                 {
+                	    System.out.println("Row " + i + " Cell Value: " + cell.toString());
 
-            Cell firstCell = row.getCell(0);
-            if (firstCell != null && firstCell.getCellType() == CellType.STRING &&
-                firstCell.getStringCellValue().trim().equalsIgnoreCase(scenarioTitle.trim())) {
+                	    if (cell.getCellType() == CellType.STRING &&
+                	        cell.getStringCellValue().trim().equalsIgnoreCase(scenarioName.trim())) 
+                	    {
+                	        scenarioRow = i;
+                	        System.out.println("Scenario found at row number: " + scenarioRow);
+                	        break;
+                	    }
+                	}
+              }
+            
+         // Begin new logic from here (line 61)
+            List<Map<String, String>> dataList = new ArrayList<>();
 
-                scenarioFound = true;
-                Row headerRow = sheet.getRow(i + 1);
-                if (headerRow == null) {
-                    throw new IllegalStateException("Header row missing after scenario title: " + scenarioTitle);
+            if (scenarioRow != -1 && scenarioRow + 1 < totalRows) 
+            {
+                Row headerRow = sheet.getRow(scenarioRow + 1);
+                if (headerRow == null) 
+                    return null;
+
+                List<String> headers = new ArrayList<>();
+                for (Cell cell : headerRow) 
+                {
+                    headers.add(cell.toString().trim());
                 }
+                System.out.println("List of header is : "+headers);
+                
+                for (int i = scenarioRow + 2; i < totalRows; i++) 
+                {
+                    Row dataRow = sheet.getRow(i);
+                    System.out.println("Values found in excel at :"+dataRow);
+                    
+                    if (dataRow == null) 
+                    	break;
 
-                for (Cell cell : headerRow) {
-                    headerIndex.put(cell.getColumnIndex(), cell.getStringCellValue().trim());
-                }
-
-                Row dataRow = sheet.getRow(i + 2);
-                if (dataRow == null) {
-                    throw new RuntimeException("No data found under scenario: " + scenarioTitle);
-                }
-
-                System.out.println("Reading data for scenario: " + scenarioTitle);
-                for (Map.Entry<Integer, String> entry : headerIndex.entrySet()) {
-                    Cell dataCell = dataRow.getCell(entry.getKey());
-                    String value = "";
-
-                    if (dataCell != null) {
-                        switch (dataCell.getCellType()) {
-                            case STRING:
-                                value = dataCell.getStringCellValue();
-                                break;
-                            case NUMERIC:
-                                value = (dataCell.getNumericCellValue() == (int) dataCell.getNumericCellValue())
-                                        ? String.valueOf((int) dataCell.getNumericCellValue())
-                                        : String.valueOf(dataCell.getNumericCellValue());
-                                break;
-                            case BOOLEAN:
-                                value = String.valueOf(dataCell.getBooleanCellValue());
-                                break;
-                            default:
-                                value = "";
+                    boolean isEmptyRow = true;
+                    for (int k = 0; k < headers.size(); k++) 
+                    {
+                        Cell cell = dataRow.getCell(k);
+                        if (cell != null && !cell.toString().trim().isEmpty()) 
+                        {
+                            isEmptyRow = false;
+                            break;
                         }
                     }
+                    
+                    if (isEmptyRow) break;
+                    
+                    Map<String, String> dataMap = new LinkedHashMap<>();
+                    for (int j = 0; j < headers.size(); j++) 
+                    {
+                        Cell cell = dataRow.getCell(j);
+                        String value = (cell != null) ? cell.toString().trim() : "";
+                        dataMap.put(headers.get(j), value);
+                    }
 
-                    value = value.trim();
-                    data.put(entry.getValue(), value);
-                    System.out.println(entry.getValue() + " = " + value);
+                    dataList.add(dataMap);
                 }
-
-                break;
             }
-        }
+            // Log final data
+            System.out.println("Extracted Data:");
+            for (Map<String, String> dataMap : dataList) 
+            {
+                System.out.println("Returning data: " + dataMap);
+            }
 
-        if (!scenarioFound) {
-            throw new RuntimeException("Scenario title not found in Excel: " + scenarioTitle);
+            return dataList;
         }
-
-        return data;
     }
 }

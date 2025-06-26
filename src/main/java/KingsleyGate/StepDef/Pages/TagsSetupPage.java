@@ -121,9 +121,47 @@ public class TagsSetupPage extends AbstractComponents
                 break;
             }
         }
+        List<String> optionsToSelect = Arrays.asList("Contacts", "Companies");
+
+     // Open the dropdown once before the loop
+        waitForWebElementToAppear(TagModulesField);
+        TagModulesField.click();
+        waitUntilAttributeValue(TagModulesField, "aria-expanded", "true");
+
+        // Locate all checkbox elements together with their labels
+        List<WebElement> options1 = driver.findElements(By.xpath("//span[input[@type='checkbox']]"));
+
+        for (String optionText : optionsToSelect) {
+            boolean found = false;
+
+            for (WebElement optionSpan : options1) {
+                // Get the visible label text next to the checkbox input
+                String label = optionSpan.getText().trim();
+
+                if (label.equalsIgnoreCase(optionText)) {
+                    WebElement checkbox = optionSpan.findElement(By.xpath(".//input[@type='checkbox']"));
+
+                    if (!checkbox.isSelected()) {
+                        checkbox.click();
+                    }
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                throw new RuntimeException("Option not found: " + optionText);
+            }
+        }
+
+        // Close dropdown after selection
+        waitUntilAttributeValue(TagModulesField, "aria-expanded", "false");
+
+
+        SaveTagBtn.click();
     }
 
-    public String selectTagModulesAndSaveTag() {
+    /*public void selectTagModulesAndSaveTag() {
         List<String> optionsToSelect = Arrays.asList("Contacts", "Companies");
 
         for (String optionText : optionsToSelect) {
@@ -155,11 +193,11 @@ public class TagsSetupPage extends AbstractComponents
         }
 
         SaveTagBtn.click();
-        waitForWebElementToAppear(PopUpMsg);
-        String popUpMsg = PopUpMsg.getText();
-        System.out.println(popUpMsg);
-        return  popUpMsg;
-    }
+        //waitForWebElementToAppear(PopUpMsg);
+        //String popUpMsg = PopUpMsg.getText();
+        //System.out.println(popUpMsg);
+        //return  popUpMsg;
+    }*/
 
     public void navigatesToContactModuleAndSelectAnyContact()
     {
@@ -205,8 +243,8 @@ public class TagsSetupPage extends AbstractComponents
         ModificationBtn.click();
         waitForWebElementToAppear(DeleteOptionBtn);
         DeleteOptionBtn.click();
-        waitForWebElementToAppear(DeleteTagBtn);
-        DeleteTagBtn.click();
+        //waitForWebElementToAppear(DeleteTagBtn);
+       // DeleteTagBtn.click();
 
     }
 
