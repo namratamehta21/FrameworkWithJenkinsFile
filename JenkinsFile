@@ -29,7 +29,7 @@ pipeline {
         }
     }
 	post {
-        success {
+        always {
             publishHTML([allowMissing: false, 
             alwaysLinkToLastBuild: false, 
             icon: '', 
@@ -41,7 +41,7 @@ pipeline {
             useWrapperFileDirectly: true])
             
             // Zip report to attach it properly
-        	sh 'zip -r ext_report.zip ext_reports/ || true'
+        	 sh 'if [ -d "ext_reports" ]; then zip -r ext_report.zip ext_reports/; fi'
         
             emailext(
             subject: "Build: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
