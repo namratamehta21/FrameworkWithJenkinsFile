@@ -1,36 +1,49 @@
-pipeline {
+pipeline 
+{
     agent any
 
-    tools {
+    tools 
+    {
         maven 'Maven'
     }
 
-    environment {
+    environment 
+    {
         BROWSER = 'chrome'
         HEADLESS = 'true'
         CUCUMBER_PUBLISH_ENABLED = 'true'
         CUCUMBER_PUBLISH_QUIET = 'false' // set to 'true' if you want minimal logs
+        
+        QA_EMAILS = 'nmehta@kingsleygate.com'
+        DEV_EMAILS = 'dev1@example.com,dev2@example.com'
     }
 
 	
-    stages {
-        stage('Checkout') {
-            steps {
+    stages 
+    {
+        stage('Checkout') 
+        {
+            steps 
+            {
                 echo 'Cloning repository...'
                 git credentialsId: 'bitbucket-creds', url: 'https://bitbucket.org/maseeley/test-automation_kingsley.git', branch: 'extentReportIntegration'
             }
         }
 
-        stage('Run Tests and Auto-Publish Cucumber Report') {
-            steps {
+        stage('Run Tests and Auto-Publish Cucumber Report') 
+        {
+            steps 
+            {
                 echo "Running tests using browser: ${BROWSER}, headless: ${HEADLESS}"
                 sh "mvn verify -Dbrowser=${BROWSER} -Dheadless=${HEADLESS}"
             }
         }
     }
-	post {
-        success {
-            publishHTML([allowMissing: false, 
+	post 
+	{
+        always 
+        {
+            publishHTML([allowMissing: true, 
             alwaysLinkToLastBuild: false, 
             icon: '', 
             keepAll: false,
@@ -45,11 +58,11 @@ pipeline {
    			 body: """<p>Hi Team,</p>
             	 <p>The Jenkins automation build has completed successfully.</p>
              	 <p>The build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status: <b>${currentBuild.currentResult}</b>.</p>
-            	 <p><a href="${env.BUILD_URL}">Click here to view the build</a></p>
              	 <p>Please find the attached <b>Extent Report</b>.</p>
+            	 <p><a href="${env.BUILD_URL}">Click here to view the build</a></p>
              	 <p>Regards,<br>QA Team</p>""",
     		recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-    		to: "nmehta@kingsleygate.com",
+    		to: "${QA_EMAILS}",
     		attachmentsPattern: "ext_reports/index.html",
     		mimeType: 'text/html'
 			)
