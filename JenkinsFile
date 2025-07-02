@@ -61,7 +61,6 @@ pipeline
              	 <p>Please find the attached <b>Extent Report</b>.</p>
             	 <p><a href="${env.BUILD_URL}">Click here to view the build</a></p>
              	 <p>Regards,<br>QA Team</p>""",
-    		recipientProviders: [[$class: 'DevelopersRecipientProvider']],
     		to: "${QA_EMAILS}",
     		attachmentsPattern: "ext_reports/index.html",
     		mimeType: 'text/html'
