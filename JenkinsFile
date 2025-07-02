@@ -40,15 +40,17 @@ pipeline {
             reportTitles: '', 
             useWrapperFileDirectly: true])
             
-            emailext (
-            subject: "Jenkins Build Result - Extent Report Attached",
+            // Zip report to attach it properly
+        	sh 'zip -r ext_report.zip ext_reports/ || true'
+        
+            emailext(
+            subject: "Build: ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
             body: """<p>Hi Team,</p>
-                     <p>The Jenkins automation build has completed successfully.</p>
-                     <p>Please find the attached <b>Extent Report</b>.</p>
-                     <p>Regards,<br>Automation Jenkins</p>""",
+                     <p>The build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status: <b>${currentBuild.currentResult}</b>.</p>
+                     <p><a href="${env.BUILD_URL}">Click here to view the build</a></p>""",
             recipientProviders: [[$class: 'DevelopersRecipientProvider']],
             to: "nmehta@kingsleygate.com",
-            attachmentsPattern: "ext_reports/index.html",
+            attachmentsPattern: "ext_report.zip",
             mimeType: 'text/html'
         )
         }
