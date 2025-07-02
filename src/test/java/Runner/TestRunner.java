@@ -16,10 +16,11 @@ import org.testng.annotations.DataProvider;
         tags = "@StageSetUp",
         monochrome = true
 )
-public class TestRunner extends AbstractTestNGCucumberTests {
-
+public class TestRunner extends AbstractTestNGCucumberTests 
+{
     @DataProvider
-    public Object[][] scenario() {
+    public Object[][] scenario() 
+    {
         return super.scenarios();
     }
 }

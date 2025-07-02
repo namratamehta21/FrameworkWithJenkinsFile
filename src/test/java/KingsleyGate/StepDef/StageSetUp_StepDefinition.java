@@ -71,7 +71,7 @@ public class StageSetUp_StepDefinition
 			{
 	            String stageCode = row.get("StageCode");
 	            System.out.println("Stage to disabled -: " + stageCode);
-	            Context.StageSetUpPage.SearchStage(stageCode);
+	            Context.StageSetUpPage.SearchStageAndDisable(stageCode);
 			}
 		}
 

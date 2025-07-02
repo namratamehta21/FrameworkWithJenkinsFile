@@ -75,29 +75,30 @@ public class StageSetUpPage  extends AbstractComponents
 
 	public void CreatingStageWithDetails(String StageCode, String StageLabel, String StageColor, String StageSequencNo, String StageReasonLookup, String StageShortDecription)
 	{
-		try 
-		{
-			Thread.sleep(5000);
-		} 
-		catch (InterruptedException e) 
-		{
-			e.printStackTrace();
-		}
 		waitForWebElementToAppear(AddStageBtn);
 		AddStageBtn.click();
+		
 		waitForWebElementToAppear(stageCode);
 		stageCode.sendKeys(StageCode);
+		
 		stageLabel.sendKeys(StageLabel);
+		
 		stageColor.sendKeys(StageColor);
+		
 		stageSequenceNo.sendKeys(StageSequencNo);
+		
 		stageReasonLookupField.sendKeys(StageReasonLookup);
+		
 		List<WebElement> options = driver.findElements(By.xpath("//ul[@role='listbox']//li"));
 		System.out.println("---- DROPDOWN OPTIONS ----");
-		for (WebElement opt : options) {
+		for (WebElement opt : options) 
+		{
 			System.out.println("• [" + opt.getText() + "]");
 		}
-		for (WebElement opt : options) {
-			if (opt.getText().equalsIgnoreCase(StageReasonLookup)) {
+		for (WebElement opt : options) 
+		{
+			if (opt.getText().equalsIgnoreCase(StageReasonLookup)) 
+			{
 				opt.click();
 				break;
 			}
@@ -106,27 +107,24 @@ public class StageSetUpPage  extends AbstractComponents
 		StageSave.click();
 	}
 
-	public void SearchStage(String StageCode)
+	public void SearchStageAndDisable(String StageCode)
 	{
 		waitForWebElementToAppear(Menu);
 		Menu.click();
+		
 		waitForWebElementToAppear(SetupModule);
 		SetupModule.click();
 		Menu.click();
+		
 		waitForWebElementToAppear(StageSetupIcon);
 		StageSetupIcon.click();
+		
 		waitForWebElementToAppear(StageSearch);
 		StageSearch.sendKeys(StageCode);
-		try 
-		{
-			Thread.sleep(5000);
-		} 
-		catch (InterruptedException e) 
-		{
-			e.printStackTrace();
-		}
+		
 		waitForWebElementToAppear(StageModificationBtn);
 		StageModificationBtn.click();
+		
 		waitForWebElementToAppear(StageDisableBtn);
 		StageDisableBtn.click();
 	}

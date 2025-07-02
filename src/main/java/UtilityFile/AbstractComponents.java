@@ -24,13 +24,13 @@ public class AbstractComponents
 
     public void waitForWebElementToAppear(WebElement findBy)
     {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
         wait.until(ExpectedConditions.visibilityOf(findBy));
     }
 
     public void waitForWebElementToBeClickable(WebElement findBy)
     {
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(findBy));
 
     }
@@ -49,18 +49,18 @@ public class AbstractComponents
     }
 
     public void waitUntilAttributeValue(WebElement element, String attribute, String expectedValue) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(driver -> expectedValue.equals(element.getAttribute(attribute)));
     }
 
     public void waitForWebElementsToAppear(List<WebElement> elements) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, Duration.ofSeconds(30))
                 .until(driver -> elements.stream().allMatch(WebElement::isDisplayed));
     }
 
     public void waitForElementToAppear(String xpath)
     {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
     }
 }

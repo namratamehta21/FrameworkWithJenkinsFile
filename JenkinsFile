@@ -39,6 +39,18 @@ pipeline {
             reportName: 'Automation Build Report', 
             reportTitles: '', 
             useWrapperFileDirectly: true])
+            
+            emailext (
+            subject: "Jenkins Build Result - Extent Report Attached",
+            body: """<p>Hi Team,</p>
+                     <p>The Jenkins automation build has completed successfully.</p>
+                     <p>Please find the attached <b>Extent Report</b>.</p>
+                     <p>Regards,<br>Automation Jenkins</p>""",
+            recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+            to: "nmehta@kingsleygate.com",
+            attachmentsPattern: "ext_reports/index.html",
+            mimeType: 'text/html'
+        )
         }
     }
 }
