@@ -1,6 +1,4 @@
-target/
-ext_reports/
-reportss/
+
 .idea
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
